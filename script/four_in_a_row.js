@@ -339,6 +339,7 @@
                                     }
                                 }
                                 playerOneTurn = true;
+                                numberOfTurn = 0;
                             }
                             else {
                                 location.reload();
