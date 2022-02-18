@@ -27,6 +27,19 @@ body {
     display: none;
 }
 
+#btndiv {
+    text-align: center;
+    margin: 10px;
+    display: none;
+}
+
+#undo {
+    font-size: 1.5em;
+    padding: 5px 10px;
+    border: 1px black solid;
+    border-radius: 30px;
+}
+
 form {
     background-color: rgb(218, 218, 218);
     border: 1px black solid;
