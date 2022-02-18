@@ -225,6 +225,7 @@
                                 $('#score #p1turn').css({'background-color':settings.playerOneColor});
                                 $('#score #p2turn').css({'background-color':'white'});
                                 playerOneTurn = true;
+                                numberOfTurn = 0;
                             }
                             else {
                                 $('td').unbind('hover');
@@ -256,6 +257,7 @@
                                 $('#score #p1turn').css({'background-color':settings.playerOneColor});
                                 $('#score #p2turn').css({'background-color':'white'});
                                 playerOneTurn = true;
+                                numberOfTurn = 0;
                             }
                             else {
                                 $('td').unbind('hover');
