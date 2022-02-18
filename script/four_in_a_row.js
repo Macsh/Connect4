@@ -37,6 +37,9 @@
             textAlign: "center",
             margin: "auto",
         });
+
+        $('#btndiv').show();
+
         $('#score #p1turn').css({'background-color':settings.playerOneColor});
 
         $('.four-in-a-row td').each(function(){
@@ -47,6 +50,8 @@
 
         let playerOneTurn = true;
         let numberOfTurn = 0;
+        let undoClick = 0;
+        let previousTurn;
 
         return this.each(function() {
             
@@ -66,6 +71,8 @@
                     let row = $('tr.'+k);
                     let playerCanvas = $(row).children('.'+column).children()[0];
                     if($(playerCanvas).hasClass('backWhite') && playerOneTurn == true){
+                        previousTurn = playerCanvas;
+                        undoClick = 0;
                         $(playerCanvas).attr('class', 'player1');
                         $(playerCanvas).css({'background-color': settings.playerOneColor, 'opacity':'1'});
                         playerOneTurn = false;
@@ -73,6 +80,8 @@
                         return false;
                     }
                     else if ($(playerCanvas).hasClass('backWhite') && playerOneTurn == false){
+                        previousTurn = playerCanvas;
+                        undoClick = 0;
                         $(playerCanvas).attr('class', 'player2');
                         $(playerCanvas).css({'background-color': settings.playerTwoColor, 'opacity':'1'});
                         playerOneTurn = true;
@@ -110,6 +119,32 @@
                         $(playerCanvas).css({'background-color': 'white', 'opacity':'1'});
                         return false;
                     }
+                }
+            });
+
+            $('#undo').on('click', function(e){
+                e.preventDefault();
+                if (numberOfTurn == 0){
+                    alert("You didn't play yet.");
+                }
+                else if (undoClick > 0){
+                    alert("You can only undo one move.");
+                }
+                else if (playerOneTurn == true){
+                    playerOneTurn = false;
+                    $(previousTurn).attr('class', 'backWhite');
+                    $(previousTurn).css({'background-color':'white'});
+                    $('#score #p1turn').css({'background-color':'white'});
+                    $('#score #p2turn').css({'background-color':settings.playerTwoColor});
+                    undoClick++;
+                }
+                else if (playerOneTurn == false){
+                    playerOneTurn = true;
+                    $(previousTurn).attr('class', 'backWhite');
+                    $(previousTurn).css({'background-color':'white'});
+                    $('#score #p1turn').css({'background-color':settings.playerOneColor});
+                    $('#score #p2turn').css({'background-color':'white'});
+                    undoClick++;
                 }
             });
 
